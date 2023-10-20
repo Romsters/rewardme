@@ -1,2 +1,2 @@
-# rewardme
-Reward anyone with crypto assets using email or github username
+# RewardMe
+Reward anyone with crypto assets using receiver's email or github username

@@ -1,0 +1,15 @@
+a, a:link, a:active, a:hover {
+  color: inherit;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background-image: url("/public/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  min-height: 100%;
+}

@@ -1,0 +1,36 @@
+{
+  "name": "rewardme",
+  "version": "1.0.0",
+  "description": "Reward anyone with crypto assets using receiver's email or github username",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romsters/rewardme.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "lerna run dev",
+    "lint": "lerna run lint"
+  },
+  "author": "Romsters",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^17.8.0",
+    "@commitlint/config-conventional": "^17.8.0",
+    "@matterlabs/prettier-config": "^1.0.3",
+    "@types/node": "^16.18.57",
+    "eslint": "^8.51.0",
+    "husky": "^8.0.3",
+    "lerna": "^7.3.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/Romsters/rewardme/issues"
+  }
+}

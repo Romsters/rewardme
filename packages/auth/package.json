@@ -1,0 +1,17 @@
+{
+  "name": "auth",
+  "version": "0.0.0",
+  "author": "Romsters",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romsters/rewardme.git"
+  },
+  "scripts": {
+    "dev": "cargo watch -x run",
+    "start": "cargo run"
+  },
+  "bugs": {
+    "url": "https://github.com/Romsters/rewardme/issues"
+  }
+}
