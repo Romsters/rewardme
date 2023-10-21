@@ -14,7 +14,7 @@ dotenv = "0.15.0"
 ethers-core = "2.0.10"
 ethers-signers = "2.0.10"
 jsonwebtoken = "8.3.0"
-reqwest = { version = "0.11.22", features = ["blocking", "json"] }
+reqwest = { version = "0.11.22", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.107"
 strum = "0.25.0"
