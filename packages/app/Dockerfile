@@ -15,19 +15,15 @@ ENV NODE_ENV=development
 RUN npm ci
 
 FROM development-stage AS build-stage
+COPY --chown=node:node ./packages/app/.env.production ./packages/app/
 RUN npm run build
 
-FROM base-stage AS production-stage
-COPY --chown=node:node --from=build-stage /usr/src/app/packages/app/build ./packages/app/build
-RUN npm i -g http-server
+FROM nginx as production-stage
+COPY --from=build-stage /usr/src/app/packages/app/nginx.config /etc/nginx/conf.d/default.conf
+COPY --from=build-stage /usr/src/app/packages/app/build /usr/share/nginx/html
 
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
+EXPOSE 80
 
-ARG PORT=3000
-ENV PORT $PORT
+STOPSIGNAL SIGTERM
 
-USER node
-WORKDIR /usr/src/app/packages/app/build
-
-CMD http-server -p $PORT
+CMD ["nginx", "-g", "daemon off;"]

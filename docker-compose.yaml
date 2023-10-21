@@ -14,3 +14,13 @@ services:
     ports:
       - '8080:8080'
     restart: unless-stopped
+  app:
+    build:
+      context: .
+      dockerfile: ./packages/app/Dockerfile
+      target: production-stage
+    environment:
+      - PORT=80
+    ports:
+      - '3000:80'
+    restart: unless-stopped
