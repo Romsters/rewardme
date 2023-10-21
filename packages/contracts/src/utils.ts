@@ -1,8 +1,8 @@
-import { Wallet, Provider, Contract } from 'zksync-web3';
-import * as hre from 'hardhat';
+import { Wallet, Provider, Contract } from "zksync-web3";
+import * as hre from "hardhat";
 import { ethers } from "ethers";
 import { HttpNetworkConfig } from "hardhat/types/config";
-import { Deployer } from '@matterlabs/hardhat-zksync-deploy';
+import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 
 export const deploy = async (artifactName: string, args: string[], isProxy?: boolean, deployer?: Deployer | null): Promise<Contract> => {
   let contract;

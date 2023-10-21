@@ -1,4 +1,4 @@
-import { utils } from 'ethers';
+import { utils } from "ethers";
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";

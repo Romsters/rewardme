@@ -1,15 +1,15 @@
-import { expect } from 'chai';
-import { Wallet } from 'zksync-web3';
-import * as hre from 'hardhat';
+import { expect } from "chai";
+import { Wallet } from "zksync-web3";
+import * as hre from "hardhat";
 import { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
-import { Deployer } from '@matterlabs/hardhat-zksync-deploy';
+import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 
 import { deploy, getProvider, getWallet, hashString } from "../src/utils";
 
 const REWARD_ME_SIGNING_PK = "0x7726827caac94a7f9e1b160f7ea819f172f7b6f9d2a97f992c38edeab82d4110";
 const REWARD_ME_VERIFICATION_PUBLIC_KEY = "0x36615Cf349d7F6344891B1e7CA7C72883F5dc049";
 
-describe('RewardMe', function () {
+describe("RewardMe", function () {
   it("verifies contract functionality", async function () {
     const provider = getProvider();
 
@@ -106,7 +106,7 @@ describe('RewardMe', function () {
       expect(err.message).to.include("The provided signature is not valid");
     }
 
-    // claim with receiver's account
+    // claim with receiver"s account
     const claimTx = await contract.connect(rewardReceiverWallet).claimRewards(receiver.id, receiver.provider, receiver.nonce, signature);
     await claimTx.wait();
 
