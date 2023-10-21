@@ -59,8 +59,8 @@ async fn authorize(payload: web::Json<AuthPayload>) -> Result<JsonResponse<AuthR
 
     let message_payload = AuthMessageJSON {
         address: payload.address.to_lowercase(),
-        provider: auth_details.provider,
         id: auth_details.user_id,
+        provider: auth_details.provider,
         nonce: payload.nonce.clone()
     };
     let message = serde_json::to_string(&message_payload).unwrap();
