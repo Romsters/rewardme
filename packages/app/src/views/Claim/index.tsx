@@ -6,7 +6,7 @@ import { Container, Box, Typography, TextField, Alert, CircularProgress, List, S
 import ReplyIcon from "@mui/icons-material/Reply";
 import { LoadingButton } from "@mui/lab";
 import { useAccount, useNetwork } from "wagmi";
-import { getRewardList, type Reward, claimRewards } from "./utils";
+import { getRewardList, type Reward, claimRewards } from "./api";
 import { GithubLogin, GithubLoginResponse } from "../../components/GithubLogin";
 import Header from "../../components/Header";
 import RewardItem from "../../components/RewardItem";

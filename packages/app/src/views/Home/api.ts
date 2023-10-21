@@ -1,4 +1,5 @@
 import { writeContract, prepareWriteContract } from "@wagmi/core";
+import { erc721ABI, erc20ABI } from "wagmi";
 import { utils } from "ethers";
 import SystemContractABI from "../../abi/SystemContract.json";
 import { waitForTransaction } from "../../utils";
@@ -59,6 +60,34 @@ export const sendNFTReward = async (
     abi: SystemContractABI,
     functionName: "sendNFTReward",
     args: [hashedReceiver, token.address, value, description],
+  });
+  const data = await writeContract(config);
+  await waitForTransaction({
+    hash: data.hash,
+  });
+  return data.hash;
+};
+
+export const approveERC20 = async (systemContractAddress: `0x${string}`, token: Token, amount: bigint) => {
+  const config = await prepareWriteContract({
+    address: token.address,
+    abi: erc20ABI,
+    functionName: "approve",
+    args: [systemContractAddress, amount],
+  });
+  const data = await writeContract(config);
+  await waitForTransaction({
+    hash: data.hash,
+  });
+  return data.hash;
+};
+
+export const approveERC721 = async (systemContractAddress: `0x${string}`, token: Token, tokenId: bigint) => {
+  const config = await prepareWriteContract({
+    address: token.address,
+    abi: erc721ABI,
+    functionName: "approve",
+    args: [systemContractAddress, tokenId],
   });
   const data = await writeContract(config);
   await waitForTransaction({

@@ -16,11 +16,10 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from "@mui/lab";
-import { useAccount, useNetwork, erc721ABI, erc20ABI } from "wagmi";
-import { writeContract, prepareWriteContract } from "@wagmi/core";
+import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
-import { ZKSYNC_ETH_ADDRESS, waitForTransaction } from "../../utils";
-import { sendETHReward, sendTokenReward, sendNFTReward } from "./utils";
+import { ZKSYNC_ETH_ADDRESS } from "../../utils";
+import { approveERC20, approveERC721, sendETHReward, sendTokenReward, sendNFTReward } from "./api";
 import Header from "../../components/Header";
 import { type Token } from "../../components/TokenItem";
 import TokenSelect from "../../components/TokenSelect";
@@ -100,16 +99,7 @@ const Home = () => {
           const txHash = await sendETHReward(systemContractAddress, selectedReceiver, selectedParsedValue, description);
           setSentRewardTxHash(txHash);
         } else if (selectedToken?.isNFT) {
-          const config = await prepareWriteContract({
-            address: selectedToken?.address as `0x${string}`,
-            abi: erc721ABI,
-            functionName: "approve",
-            args: [systemContractAddress, selectedParsedValue],
-          });
-          const data = await writeContract(config);
-          await waitForTransaction({
-            hash: data.hash,
-          });
+          await approveERC721(systemContractAddress, selectedToken, selectedParsedValue);
           const txHash = await sendNFTReward(
             systemContractAddress,
             selectedReceiver,
@@ -119,16 +109,7 @@ const Home = () => {
           );
           setSentRewardTxHash(txHash);
         } else {
-          const config = await prepareWriteContract({
-            address: selectedToken?.address as `0x${string}`,
-            abi: erc20ABI,
-            functionName: "approve",
-            args: [systemContractAddress, selectedParsedValue],
-          });
-          const data = await writeContract(config);
-          await waitForTransaction({
-            hash: data.hash,
-          });
+          await approveERC20(systemContractAddress, selectedToken!, selectedParsedValue);
           const txHash = await sendTokenReward(
             systemContractAddress,
             selectedReceiver,

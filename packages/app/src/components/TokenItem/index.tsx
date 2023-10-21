@@ -2,7 +2,7 @@ import { Box, Chip, Tooltip } from "@mui/material";
 import { formatTokenBalance, formatAddressToDisplay } from "../../utils";
 
 export interface Token {
-  address: string;
+  address: `0x${string}`;
   balance: string;
   isNFT: boolean;
   token: {
