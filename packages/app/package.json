@@ -44,7 +44,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "debug": "node test.ts",
-    "lint": "eslint \"{src,test}/**/*.tsx\" --fix"
+    "lint": "eslint \"{src,test}/**/*.{js,ts,tsx}\" --fix"
   },
   "prettier": "@matterlabs/prettier-config",
   "lint-staged": {
