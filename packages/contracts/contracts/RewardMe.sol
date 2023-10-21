@@ -4,6 +4,7 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./lib/Verifier.sol";
 
 struct Reward {
@@ -15,12 +16,12 @@ struct Reward {
   uint8 tokenType;
 }
 
-contract RewardMe {
+contract RewardMe is Initializable {
   address public publicKey;
 
   mapping (string => Reward[]) public rewards;
 
-  constructor(address _publicKey) {
+  function initialize(address _publicKey) public initializer {
     publicKey = _publicKey;
   }
 

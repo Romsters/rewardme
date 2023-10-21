@@ -42,13 +42,13 @@ describe('RewardMe', function () {
     const signature = await rewardMeSignerWallet.signMessage(hre.ethers.utils.arrayify(hashedMessage));
 
     // deploy contract with simulated Auth server signer's public key
-    const contract = await deploy("RewardMe", [REWARD_ME_VERIFICATION_PUBLIC_KEY], deployer);
+    const contract = await deploy("RewardMe", [REWARD_ME_VERIFICATION_PUBLIC_KEY], true, deployer);
 
     // deploy token for test
-    const token = await deploy("Coin", [], deployer);
+    const token = await deploy("Coin", [], false, deployer);
 
     // deploy NFT for test
-    const zkNFT = await deploy("ZkNFT", [], deployer);
+    const zkNFT = await deploy("ZkNFT", [], false, deployer);
     const mintTx = await zkNFT.mintNFT(deployerSigner.address, "https://gateway.pinata.cloud/ipfs/QmWi2YK2cmNpJRq4pLKJj2fPz22w1V9ZAi7oP7s28GMQok");
     await mintTx.wait();
 

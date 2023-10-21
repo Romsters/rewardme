@@ -4,14 +4,16 @@ import { ethers } from "ethers";
 import { HttpNetworkConfig } from "hardhat/types/config";
 import { Deployer } from '@matterlabs/hardhat-zksync-deploy';
 
-export const deploy = async (artifactName: string, args: string[], deployer?: Deployer | null): Promise<Contract> => {
+export const deploy = async (artifactName: string, args: string[], isProxy?: boolean, deployer?: Deployer | null): Promise<Contract> => {
   let contract;
   if (!deployer) {
     const factory = await hre.ethers.getContractFactory(artifactName);
-    contract = await factory.deploy(...args);
+    contract = isProxy ? await hre.upgrades.deployProxy(factory, args, { initializer: "initialize" }) : await factory.deploy(...args);
   } else {
     const artifact = await deployer.loadArtifact(artifactName);
-    contract = await deployer.deploy(artifact, args);
+    contract = isProxy ?
+      await hre.zkUpgrades.deployProxy(deployer.zkWallet, artifact, args, { initializer: "initialize" }) :
+      await deployer.deploy(artifact, args);
   }
   console.log(`${artifactName} deployed at ${contract.address}`);
   return contract;
