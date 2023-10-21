@@ -6,21 +6,21 @@ import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
 import "@matterlabs/hardhat-zksync-upgradable";
 
-export const zkSyncInMemoryNode = {
+const zkSyncInMemoryNode = {
   url: "http://127.0.0.1:8011",
   ethNetwork: "http://127.0.0.1:8545",
   zksync: true,
   accounts: ["0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e"]
 }
 
-export const zkSyncLocalNode = {
+const zkSyncLocalNode = {
   url: "http://127.0.0.1:3050",
   ethNetwork: "http://127.0.0.1:8545",
   zksync: true,
   accounts: ["0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e"]
 }
 
-export const zkSyncGoerli = {
+const zkSyncGoerli = {
   url: "https://zksync2-testnet.zksync.dev",
   ethNetwork: "goerli",
   zksync: true,
@@ -28,11 +28,19 @@ export const zkSyncGoerli = {
     "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
 }
 
-export const zkSyncMainnet = {
+const zkSyncMainnet = {
   url: "https://mainnet.era.zksync.io",
   ethNetwork: "mainnet",
   zksync: true,
   verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
+}
+
+const hardhat = {
+  zksync: false,
+  accounts: [{
+    privateKey: "0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e",
+    balance: utils.parseEther("100").toString()
+  }]
 }
 
 const config: HardhatUserConfig = {
@@ -42,13 +50,7 @@ const config: HardhatUserConfig = {
   },
   defaultNetwork: "zkSyncInMemoryNode",
   networks: {
-    hardhat: {
-      zksync: false,
-      accounts: [{
-        privateKey: "0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e",
-        balance: utils.parseEther("100").toString()
-      }]
-    },
+    hardhat,
     zkSyncInMemoryNode,
     zkSyncLocalNode,
     zkSyncGoerli,

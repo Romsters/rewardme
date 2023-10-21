@@ -6,7 +6,7 @@ import { defineChain } from "viem";
 const localNode = defineChain({
   id: 270,
   network: "geth",
-  name: "zkSync Local",
+  name: "zkSyn Era Local",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -18,7 +18,7 @@ const localNode = defineChain({
   },
   blockExplorers: {
     default: {
-      name: "Zksync Block explorer",
+      name: "zkSync Block explorer",
       url: "http://localhost:3010",
       apiUrl: "http://localhost:3020",
     },
@@ -41,15 +41,38 @@ const testnet = defineChain({
   },
   blockExplorers: {
     default: {
-      name: "Zksync Block explorer",
+      name: "zkSync Block explorer",
       url: "https://goerli.explorer.zksync.io",
-      apiUrl: "https://staging-block-explorer-api.testnets.zksync.dev",
+      apiUrl: "https://block-explorer-api.testnets.zksync.dev",
     },
   },
   systemContractAddress: null,
 });
 
-export const { chains, publicClient } = configureChains([testnet, localNode], [publicProvider()]);
+const mainnet = defineChain({
+  id: 324,
+  network: "mainnet",
+  name: "zkSync Era Mainnet",
+  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://mainnet.era.zksync.io"],
+    },
+    public: {
+      http: ["https://mainnet.era.zksync.io"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "zkSync Block explorer",
+      url: "https://explorer.zksync.io",
+      apiUrl: "https://block-explorer-api.mainnet.zksync.io",
+    },
+  },
+  systemContractAddress: null,
+});
+
+export const { chains, publicClient } = configureChains([mainnet, testnet, localNode], [publicProvider()]);
 
 export const config = createConfig({
   autoConnect: true,
