@@ -123,7 +123,11 @@ const Claim = () => {
     setClaimRewardsError("");
     setLoginRequired(false);
     const signatureExp = new Date(parseInt(signatureResponse?.message?.nonce || "0", 16) * 1000);
-    if (signatureResponse?.username?.toLowerCase() !== receiver.toLowerCase() || new Date() > signatureExp) {
+    if (
+      signatureResponse?.username?.toLowerCase() !== receiver.toLowerCase() ||
+      signatureResponse?.message.address !== address?.toLowerCase() ||
+      new Date() > signatureExp
+    ) {
       setLoginRequired(true);
       return;
     }
