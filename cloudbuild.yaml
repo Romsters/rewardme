@@ -4,7 +4,7 @@ steps:
     args: [
       'build',
       '-t', 'gcr.io/$PROJECT_ID/github.com/romsters/rewardme:$COMMIT_SHA',
-      '.'
+      '/packages/auth/.'
     ]
 options:
   logging: CLOUD_LOGGING_ONLY
