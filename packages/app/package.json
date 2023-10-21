@@ -75,5 +75,6 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "lint-staged": "^15.0.2"
-  }
+  },
+  "homepage": "./"
 }

@@ -13,7 +13,8 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "lerna run dev",
-    "lint": "lerna run lint"
+    "lint": "lerna run lint",
+    "build": "lerna run build"
   },
   "author": "Romsters",
   "license": "MIT",
