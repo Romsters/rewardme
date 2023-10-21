@@ -23,13 +23,14 @@ const localNode = defineChain({
       apiUrl: "http://localhost:3020",
     },
   },
-  systemContractAddress: "0x809c896B311982F3Aa18FfD3493169401c5e3347",
+  systemContractAddress:
+    localStorage.getItem("rewardMeLocalNodeSystemContract") || process.env.REACT_APP_LOCAL_NODE_SYSTEM_CONTRACT_ADDRESS,
 });
 
-const testnet = defineChain({
+const goerliTestnet = defineChain({
   id: 280,
   network: "goerli",
-  name: "zkSync Era Testnet",
+  name: "zkSync Era Goerli Testnet",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -46,7 +47,7 @@ const testnet = defineChain({
       apiUrl: "https://block-explorer-api.testnets.zksync.dev",
     },
   },
-  systemContractAddress: null,
+  systemContractAddress: process.env.REACT_APP_GOERLI_TESTNET_SYSTEM_CONTRACT_ADDRESS,
 });
 
 const mainnet = defineChain({
@@ -69,10 +70,10 @@ const mainnet = defineChain({
       apiUrl: "https://block-explorer-api.mainnet.zksync.io",
     },
   },
-  systemContractAddress: null,
+  systemContractAddress: process.env.REACT_APP_MAINNET_SYSTEM_CONTRACT_ADDRESS,
 });
 
-export const { chains, publicClient } = configureChains([mainnet, testnet, localNode], [publicProvider()]);
+export const { chains, publicClient } = configureChains([mainnet, goerliTestnet, localNode], [publicProvider()]);
 
 export const config = createConfig({
   autoConnect: true,

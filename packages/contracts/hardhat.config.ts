@@ -7,15 +7,15 @@ import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
 import "@matterlabs/hardhat-zksync-upgradable";
 
-const zkSyncInMemoryNode = {
-  url: "http://127.0.0.1:8011",
+const zkSyncLocalNode = {
+  url: "http://127.0.0.1:3050",
   ethNetwork: "http://127.0.0.1:8545",
   zksync: true,
   accounts: ["0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e"]
 }
 
-const zkSyncLocalNode = {
-  url: "http://127.0.0.1:3050",
+const zkSyncInMemoryNode = {
+  url: "http://127.0.0.1:8011",
   ethNetwork: "http://127.0.0.1:8545",
   zksync: true,
   accounts: ["0xd293c684d884d56f8d6abd64fc76757d3664904e309a0645baf8522ab6366d9e"]
@@ -49,11 +49,11 @@ const config: HardhatUserConfig = {
     version: "latest",
     settings: {},
   },
-  defaultNetwork: "zkSyncInMemoryNode",
+  defaultNetwork: "zkSyncLocalNode",
   networks: {
     hardhat,
-    zkSyncInMemoryNode,
     zkSyncLocalNode,
+    zkSyncInMemoryNode,
     zkSyncGoerli,
     zkSyncMainnet
   },
