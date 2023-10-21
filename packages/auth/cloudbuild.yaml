@@ -3,7 +3,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-t', 'gcr.io/$PROJECT_ID/rewardme-auth:latest',
+      '-t', 'gcr.io/$PROJECT_ID/github.com/romsters/rewardme:$COMMIT_SHA',
       '.'
     ]
     env:
