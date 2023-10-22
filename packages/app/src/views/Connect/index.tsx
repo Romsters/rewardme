@@ -2,7 +2,6 @@ import { Container, Box, Button, Alert, Typography, Slide } from "@mui/material"
 import { Navigate } from "react-router-dom";
 import { useAccount, useConnect } from "wagmi";
 import Header from "../../components/Header";
-import { config } from "../../config";
 
 const style = {
   display: "flex",
@@ -19,9 +18,7 @@ const style = {
 
 const Connect = () => {
   const { isConnected } = useAccount();
-  const { connect, error } = useConnect({
-    connector: config.connectors[0],
-  });
+  const { connect, connectors, error } = useConnect();
 
   if (isConnected) {
     return <Navigate to="/" replace={true} />;
@@ -44,9 +41,19 @@ const Connect = () => {
             Want to send a crypto reward to somebody, but you don't know the receiver's account address?
           </Typography>
         </Slide>
-        <Button variant="contained" size="large" sx={{ width: "400px", marginX: "auto" }} onClick={() => connect()}>
-          Connect Wallet
-        </Button>
+        {connectors
+          .filter((connector) => connector.ready)
+          .map((connector) => (
+            <Button
+              key={connector.id}
+              variant="contained"
+              size="large"
+              sx={{ width: "400px", marginX: "auto", marginBottom: "20px" }}
+              onClick={() => connect({ connector })}
+            >
+              Connect with {connector.name}
+            </Button>
+          ))}
         {error && <Alert severity="error">{error.message}</Alert>}
       </Box>
     </Container>

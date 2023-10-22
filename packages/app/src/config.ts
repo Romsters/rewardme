@@ -2,6 +2,7 @@ import { configureChains, createConfig } from "wagmi";
 import { sepolia } from "@wagmi/core";
 import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { defineChain } from "viem";
 
 const zkSyncLocalNode = defineChain({
@@ -90,5 +91,13 @@ export const { chains, publicClient } = configureChains(
 export const config = createConfig({
   autoConnect: true,
   publicClient,
-  connectors: [new MetaMaskConnector({ chains })],
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        projectId: process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID!,
+      },
+    }),
+  ],
 });
