@@ -133,7 +133,6 @@ function Header() {
             ))}
           </Menu>
         </Box>
-        <EmojiEventsIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
         <Typography
           variant="h5"
           noWrap
@@ -150,10 +149,7 @@ function Header() {
             textDecoration: "none",
           }}
         >
-          <Box component="span">Reward</Box>
-          <Box component="span" sx={{ color: "warning.main" }}>
-            Me
-          </Box>
+          <EmojiEventsIcon color="warning" />
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           <Tabs value={currentTab} onChange={handleTabChange}>

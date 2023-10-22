@@ -176,7 +176,7 @@ const Claim = () => {
         <Typography marginY="20px">Enter receiver's Github username or Google account email</Typography>
         <Box
           sx={{
-            width: "400px",
+            maxWidth: "400px",
           }}
         >
           <TextField
@@ -203,6 +203,9 @@ const Claim = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              gap: "20px",
             }}
           >
             <GithubLogin

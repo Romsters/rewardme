@@ -32,12 +32,12 @@ export default function RewardItem(reward: Reward) {
         borderColor: "rgba(255, 167, 38, 0.1)",
       }}
     >
-      <ListItemAvatar sx={{ marginRight: "40px" }}>
+      <ListItemAvatar sx={{ marginRight: { xs: "20px", md: "40px" } }}>
         {reward.tokenType === 2 && (
           <Box
             sx={{
-              width: "120px",
-              height: "80px",
+              width: { xs: "60px", md: "120px" },
+              height: { xs: "40px", md: "80px" },
             }}
           >
             <div className="ERC721">
@@ -54,7 +54,11 @@ export default function RewardItem(reward: Reward) {
                   }),
                 }}
               >
-                <Chip size="small" label="NFT" sx={{ fontWeight: "bold" }} />
+                <Chip
+                  size="small"
+                  label="NFT"
+                  sx={{ fontWeight: "bold", overflow: "initial", textOverflow: "initial" }}
+                />
               </Box>
             </div>
           </Box>
@@ -62,12 +66,16 @@ export default function RewardItem(reward: Reward) {
         {reward.tokenType !== 2 && (
           <Box
             sx={{
-              width: "120px",
-              height: "80px",
+              width: { xs: "60px", md: "120px" },
+              height: { xs: "40px", md: "80px" },
             }}
           >
             <div className="ERC20">
-              <Chip size="small" label="ERC20" sx={{ fontWeight: "bold" }} />
+              <Chip
+                size="small"
+                label="ERC20"
+                sx={{ fontWeight: "bold", overflow: "initial", textOverflow: "initial" }}
+              />
             </div>
           </Box>
         )}
@@ -75,6 +83,13 @@ export default function RewardItem(reward: Reward) {
       <ListItemText
         primary={
           <>
+            <Typography component="span">
+              <Tooltip title={reward.token} placement="top">
+                <Typography color="warning.light" component="span" sx={{ fontWeight: "bold" }}>
+                  {reward.symbol}
+                </Typography>
+              </Tooltip>
+            </Typography>
             {reward.tokenType !== 2 && (
               <Typography
                 component="span"
@@ -84,25 +99,21 @@ export default function RewardItem(reward: Reward) {
                   maxWidth: "120px",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  mr: "10px",
                 }}
               >
-                {amount}&nbsp;
+                &nbsp;
+                {amount}
               </Typography>
             )}
-            <Typography component="span">
-              <Tooltip title={reward.token} placement="top">
-                <Typography color="warning.light" component="span" sx={{ fontWeight: "bold" }}>
-                  {reward.symbol}
-                </Typography>
-              </Tooltip>
-            </Typography>
             {reward.tokenType === 2 && (
-              <Typography component="span" sx={{}}>
-                {" №"}
+              <Typography component="span" sx={{ mr: "10px" }}>
+                &nbsp;
+                {"№"}
                 {reward.tokenId.toString()}
               </Typography>
             )}
-            <Typography component="span" sx={{ marginX: "20px" }}>
+            <Typography component="span" sx={{ mr: "10px", color: "secondary.main" }}>
               {"from"}
             </Typography>
             <Tooltip title={reward.from} placement="top">

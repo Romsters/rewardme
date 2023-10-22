@@ -1,5 +1,5 @@
 import { Box, Chip, Tooltip } from "@mui/material";
-import { formatTokenBalance, formatAddressToDisplay } from "../../utils";
+import { formatTokenBalance } from "../../utils";
 
 export interface Token {
   address: `0x${string}`;
@@ -13,7 +13,6 @@ export interface Token {
 
 export default function TokenItem(props: Token) {
   const balance = formatTokenBalance(props.balance, props.token.decimals);
-  const address = formatAddressToDisplay(props.address);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
@@ -22,15 +21,14 @@ export default function TokenItem(props: Token) {
         sx={{ width: "80px", marginRight: "10px", fontWeight: "bold" }}
         label={props.isNFT ? "NFT" : "ERC20"}
       />
-      <Chip sx={{ width: "80px", marginRight: "10px" }} label={props.token.symbol} />
-      <Box component="span" sx={{ marginRight: "30px" }}>
-        {address}
-      </Box>
-      <Tooltip title={balance}>
+      <Tooltip title={props.address} placement="top">
+        <Chip sx={{ width: "80px", marginRight: "10px" }} label={props.token.symbol} />
+      </Tooltip>
+      <Tooltip title={balance} placement="top">
         <Box
           component="span"
           sx={{
-            maxWidth: "120px",
+            maxWidth: "80px",
             overflow: "hidden",
             textOverflow: "ellipsis",
             color: "primary.main",

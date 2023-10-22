@@ -13,10 +13,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "100%",
   maxWidth: "400px",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  p: "6px",
 };
 
 export default function NetworkSwitchModal({ isOpened, handleClose }: NetworkSwitchModalProps) {
@@ -28,10 +25,19 @@ export default function NetworkSwitchModal({ isOpened, handleClose }: NetworkSwi
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Choose a network to switch to
-        </Typography>
-        <NetworkSwitcher />
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Choose a network to switch to
+          </Typography>
+          <NetworkSwitcher />
+        </Box>
       </Box>
     </Modal>
   );

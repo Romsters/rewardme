@@ -99,7 +99,7 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
 
   return (
     <Box>
-      <FormControl sx={{ minWidth: "400px" }}>
+      <FormControl sx={{ minWidth: "320px" }}>
         <InputLabel id="demo-simple-select-label">Select token</InputLabel>
         <Select
           labelId="demo-simple-select-label"
