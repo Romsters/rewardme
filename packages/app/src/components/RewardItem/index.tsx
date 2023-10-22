@@ -57,7 +57,7 @@ export default function RewardItem(reward: Reward) {
                 <Chip
                   size="small"
                   label="NFT"
-                  sx={{ fontWeight: "bold", overflow: "initial", textOverflow: "initial" }}
+                  sx={{ visibility: { xs: "hidden", md: "visible" }, fontWeight: "bold" }}
                 />
               </Box>
             </div>
@@ -74,7 +74,7 @@ export default function RewardItem(reward: Reward) {
               <Chip
                 size="small"
                 label="ERC20"
-                sx={{ fontWeight: "bold", overflow: "initial", textOverflow: "initial" }}
+                sx={{ visibility: { xs: "hidden", md: "visible" }, fontWeight: "bold" }}
               />
             </div>
           </Box>
