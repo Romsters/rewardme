@@ -48,7 +48,7 @@ const Connect = () => {
               key={connector.id}
               variant="contained"
               size="large"
-              sx={{ width: "400px", marginX: "auto", marginBottom: "20px" }}
+              sx={{ minWidth: "320px", maxWidth: "400px", marginX: "auto", marginBottom: "20px" }}
               onClick={() => connect({ connector })}
             >
               Connect with {connector.name}
