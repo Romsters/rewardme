@@ -1,4 +1,4 @@
-import { Container, Box, Button, Alert } from "@mui/material";
+import { Container, Box, Button, Alert, Typography, Slide } from "@mui/material";
 import { Navigate } from "react-router-dom";
 import { useAccount, useConnect } from "wagmi";
 import Header from "../../components/Header";
@@ -13,7 +13,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
-  maxWidth: "400px",
+  maxWidth: "800px",
   p: 4,
 };
 
@@ -31,7 +31,20 @@ const Connect = () => {
     <Container>
       <Header />
       <Box sx={style}>
-        <Button variant="contained" size="large" onClick={() => connect()}>
+        <Slide direction="down" timeout={1000} in mountOnEnter unmountOnExit>
+          <Typography
+            variant="h4"
+            sx={{
+              maxWidth: "600px",
+              marginX: "auto",
+              marginBottom: "60px",
+              textAlign: "center",
+            }}
+          >
+            Want to send a crypto reward to somebody, but you don't know the receiver's account address?
+          </Typography>
+        </Slide>
+        <Button variant="contained" size="large" sx={{ width: "400px", marginX: "auto" }} onClick={() => connect()}>
           Connect Wallet
         </Button>
         {error && <Alert severity="error">{error.message}</Alert>}
