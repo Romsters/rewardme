@@ -18,3 +18,5 @@ export const waitForTransaction = async ({ hash }: { hash: `0x${string}` }) => {
 };
 
 export const ZKSYNC_ETH_ADDRESS = "0x000000000000000000000000000000000000800a";
+
+export const L1_ETH_ADDRESS = "0x0000000000000000000000000000000000000000";

@@ -23,6 +23,8 @@
   },
   "scripts": {
     "deploy": "yarn hardhat deploy-zksync --script deploy.ts",
+    "deployL1": "yarn hardhat run deploy/deployL1.ts --network sepolia",
+    "verifyL1": "yarn hardhat verify",
     "test": "yarn hardhat test"
   }
 }

@@ -115,3 +115,4 @@ dist
 archived_contracts
 .zksolc-libraries-cache
 .upgradable
+.openzeppelin

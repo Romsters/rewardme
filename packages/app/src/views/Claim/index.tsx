@@ -41,6 +41,7 @@ const Claim = () => {
   const [claimRewardsTxHash, setClaimRewardsTxHash] = useState("");
 
   const systemContractAddress = (chain as any)?.systemContractAddress;
+  const isL2 = !!(chain as any)?.isL2;
 
   const fetchRewards = async () => {
     if (!receiverDebounced) {
@@ -49,7 +50,7 @@ const Claim = () => {
     setRewards([]);
     setRewardsLoading(true);
     try {
-      const rewards = await getRewardList(systemContractAddress, receiverDebounced);
+      const rewards = await getRewardList(systemContractAddress, receiverDebounced, isL2);
       setRewards(rewards);
     } finally {
       setRewardsLoading(false);

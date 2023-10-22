@@ -7,6 +7,10 @@ import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
 import "@matterlabs/hardhat-zksync-upgradable";
 
+// load env file
+import dotenv from "dotenv";
+dotenv.config();
+
 const zkSyncLocalNode = {
   url: "http://127.0.0.1:3050",
   ethNetwork: "http://127.0.0.1:8545",
@@ -25,6 +29,7 @@ const zkSyncGoerli = {
   url: "https://zksync2-testnet.zksync.dev",
   ethNetwork: "goerli",
   zksync: true,
+  accounts: [process.env.WALLET_PRIVATE_KEY || ""],
   verifyURL:
     "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
 }
@@ -44,6 +49,12 @@ const hardhat = {
   }]
 }
 
+const sepolia = {
+  zksync: false,
+  url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}`,
+  accounts: [process.env.WALLET_PRIVATE_KEY || ""]
+}
+
 const config: HardhatUserConfig = {
   zksolc: {
     version: "latest",
@@ -52,6 +63,7 @@ const config: HardhatUserConfig = {
   defaultNetwork: "zkSyncLocalNode",
   networks: {
     hardhat,
+    sepolia,
     zkSyncLocalNode,
     zkSyncInMemoryNode,
     zkSyncGoerli,
@@ -59,6 +71,9 @@ const config: HardhatUserConfig = {
   },
   solidity: {
     version: "0.8.18",
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
 };
 

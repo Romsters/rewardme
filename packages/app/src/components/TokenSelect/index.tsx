@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNetwork, useAccount, erc721ABI, readContracts } from "wagmi";
+import { fetchBalance } from "@wagmi/core";
 import { Box, InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { ZKSYNC_ETH_ADDRESS } from "../../utils";
+import { ZKSYNC_ETH_ADDRESS, L1_ETH_ADDRESS } from "../../utils";
 import TokenItem, { type Token } from "../TokenItem";
 
 export interface TokenSelectProps {
@@ -16,22 +17,42 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
   const { address } = useAccount();
   const [isLoading, setLoading] = useState(false);
   const [tokens, setTokens] = useState<Token[]>([]);
+  const isL2 = !!(chain as any)?.isL2;
 
   const fetchUserTokens = async () => {
     setLoading(isLoading);
     try {
-      const blockExplorerApiUrl = (chain as any).blockExplorers.default.apiUrl;
-      const response = await fetch(`${blockExplorerApiUrl}/address/${address}`);
-      const addressData = await response.json();
-      const tokens = Object.keys(addressData.balances)
-        .filter((tokenAddress) => Number(addressData.balances[tokenAddress].balance) > 0)
-        .map((tokenAddress) => ({
-          address: tokenAddress,
-          isNFT: false,
-          ...addressData.balances[tokenAddress],
-        }));
+      let tokens = [];
+      if (!isL2) {
+        // Replace with proper explorer calls to get all tokens
+        const ethBalance = await fetchBalance({ address: address! });
+        tokens = [
+          {
+            address: L1_ETH_ADDRESS,
+            balance: ethBalance.value.toString(),
+            isNFT: false,
+            token: {
+              decimals: ethBalance.decimals,
+              symbol: ethBalance.symbol,
+            },
+          },
+        ];
+      } else {
+        const blockExplorerApiUrl = (chain as any).blockExplorers.default.apiUrl;
+        const response = await fetch(`${blockExplorerApiUrl}/address/${address}`);
+        const addressData = await response.json();
+        tokens = Object.keys(addressData.balances)
+          .filter((tokenAddress) => Number(addressData.balances[tokenAddress].balance) > 0)
+          .map((tokenAddress) => ({
+            address: tokenAddress,
+            isNFT: false,
+            ...addressData.balances[tokenAddress],
+          }));
+      }
 
-      const ethToken = tokens.find((token) => token.address.toLowerCase() === ZKSYNC_ETH_ADDRESS);
+      const ethToken = tokens.find((token) =>
+        [L1_ETH_ADDRESS, ZKSYNC_ETH_ADDRESS].includes(token.address.toLowerCase())
+      );
       if (ethToken) {
         ethToken.token = {
           symbol: "ETH",

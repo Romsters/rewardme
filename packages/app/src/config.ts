@@ -1,12 +1,13 @@
 import { configureChains, createConfig } from "wagmi";
+import { sepolia } from "@wagmi/core";
 import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { defineChain } from "viem";
 
-const localNode = defineChain({
+const zkSyncLocalNode = defineChain({
   id: 270,
   network: "geth",
-  name: "zkSyn Era Local",
+  name: "zkSync Era Local",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
@@ -23,11 +24,12 @@ const localNode = defineChain({
       apiUrl: "http://localhost:3020",
     },
   },
+  isL2: true,
   systemContractAddress:
     localStorage.getItem("rewardMeLocalNodeSystemContract") || process.env.REACT_APP_LOCAL_NODE_SYSTEM_CONTRACT_ADDRESS,
 });
 
-const goerliTestnet = defineChain({
+const zkSyncGoerliTestnet = defineChain({
   id: 280,
   network: "goerli",
   name: "zkSync Era Goerli Testnet",
@@ -47,10 +49,11 @@ const goerliTestnet = defineChain({
       apiUrl: "https://block-explorer-api.testnets.zksync.dev",
     },
   },
+  isL2: true,
   systemContractAddress: process.env.REACT_APP_GOERLI_TESTNET_SYSTEM_CONTRACT_ADDRESS,
 });
 
-const mainnet = defineChain({
+const zkSyncGoerliMainnet = defineChain({
   id: 324,
   network: "mainnet",
   name: "zkSync Era Mainnet",
@@ -70,10 +73,19 @@ const mainnet = defineChain({
       apiUrl: "https://block-explorer-api.mainnet.zksync.io",
     },
   },
+  isL2: true,
   systemContractAddress: process.env.REACT_APP_MAINNET_SYSTEM_CONTRACT_ADDRESS,
 });
 
-export const { chains, publicClient } = configureChains([mainnet, goerliTestnet, localNode], [publicProvider()]);
+const sepoliaTestnet = {
+  ...sepolia,
+  systemContractAddress: process.env.REACT_APP_L1_SEPOLIA_SYSTEM_CONTRACT_ADDRESS,
+};
+
+export const { chains, publicClient } = configureChains(
+  [zkSyncGoerliMainnet, zkSyncGoerliTestnet, zkSyncLocalNode, sepoliaTestnet],
+  [publicProvider()]
+);
 
 export const config = createConfig({
   autoConnect: true,

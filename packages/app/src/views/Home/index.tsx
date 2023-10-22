@@ -18,7 +18,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from "@mui/lab";
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
-import { ZKSYNC_ETH_ADDRESS } from "../../utils";
+import { ZKSYNC_ETH_ADDRESS, L1_ETH_ADDRESS } from "../../utils";
 import { approveERC20, approveERC721, sendETHReward, sendTokenReward, sendNFTReward } from "./api";
 import Header from "../../components/Header";
 import { type Token } from "../../components/TokenItem";
@@ -95,7 +95,7 @@ const Home = () => {
       setIsSendRewardLoading(true);
       setSendRewardError("");
       try {
-        if (selectedToken?.address.toLowerCase() === ZKSYNC_ETH_ADDRESS) {
+        if ([L1_ETH_ADDRESS, ZKSYNC_ETH_ADDRESS].includes(selectedToken?.address.toLowerCase() || "")) {
           const txHash = await sendETHReward(systemContractAddress, selectedReceiver, selectedParsedValue, description);
           setSentRewardTxHash(txHash);
         } else if (selectedToken?.isNFT) {

@@ -49,7 +49,7 @@
   "prettier": "@matterlabs/prettier-config",
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint . --fix"
+      "eslint \"**/app/{src,test}/**/*.{js,ts,tsx}\" --fix"
     ]
   },
   "eslintConfig": {

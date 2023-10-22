@@ -1,6 +1,6 @@
 import { readContract, readContracts, writeContract, prepareWriteContract, erc20ABI, erc721ABI } from "@wagmi/core";
 import { utils } from "ethers";
-import { ZKSYNC_ETH_ADDRESS, waitForTransaction } from "../../utils";
+import { ZKSYNC_ETH_ADDRESS, L1_ETH_ADDRESS, waitForTransaction } from "../../utils";
 import SystemContractABI from "../../abi/SystemContract.json";
 
 export interface Reward {
@@ -40,7 +40,7 @@ const fetchTokenFields = async (
   });
 };
 
-export const getRewardList = async (systemContractAddress: `0x${string}`, receiver: string) => {
+export const getRewardList = async (systemContractAddress: `0x${string}`, receiver: string, isL2 = false) => {
   const hashedReceiver = utils.keccak256(utils.defaultAbiCoder.encode(["string"], [receiver.toLowerCase()]));
   const rewards = (await readContract({
     address: systemContractAddress,
@@ -53,7 +53,7 @@ export const getRewardList = async (systemContractAddress: `0x${string}`, receiv
   ethTokenRewards.forEach((reward) => {
     reward.decimals = 18;
     reward.symbol = "ETH";
-    reward.token = ZKSYNC_ETH_ADDRESS;
+    reward.token = isL2 ? ZKSYNC_ETH_ADDRESS : L1_ETH_ADDRESS;
   });
   const erc20TokenRewards = rewards.filter((reward) => reward.tokenType === 1);
   const erc721TokenRewards = rewards.filter((reward) => reward.tokenType === 2);
