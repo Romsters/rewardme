@@ -18,7 +18,7 @@ The deployed contracts are verified automatically if `verifyURL` is present for 
 ```
 npm run deployL1 -- --network {network_name_here}
 ```
-The deployed contracts are NOT verified automatically. To verify run:
+### Verification
 ```
-npm run verifyL1 -- --network {network_name_here} {contract_address_here}
+npm run verify -- --network {network_name_here} {contract_address_here}
 ```
