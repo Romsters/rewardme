@@ -38,7 +38,7 @@ const Connect = () => {
               textAlign: "center",
             }}
           >
-            Want to send a crypto reward to somebody, but you don't know the receiver's account address?
+            Want to send some crypto assets to somebody, but you don't know the receiver's account address?
           </Typography>
         </Slide>
         {connectors
