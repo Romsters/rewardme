@@ -12,7 +12,7 @@ export interface TokenSelectProps {
 }
 
 export default function TokenSelect({ value, setValue }: TokenSelectProps) {
-  const initialized = useRef(false);
+  const currentChainId = useRef<string>("");
   const { chain } = useNetwork();
   const { address } = useAccount();
   const [isLoading, setLoading] = useState(false);
@@ -86,12 +86,16 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
   };
 
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      fetchUserTokens();
+    if (!chain?.id) {
+      return;
     }
+    if (currentChainId.current === chain.id.toString()) {
+      return;
+    }
+    currentChainId.current = chain.id.toString();
+    fetchUserTokens();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [chain?.id]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(tokens.find((token) => token.address === event.target.value) || null);

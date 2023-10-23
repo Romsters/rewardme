@@ -44,10 +44,10 @@ const Claim = () => {
   const isL2 = !!(chain as any)?.isL2;
 
   const fetchRewards = async () => {
+    setRewards([]);
     if (!receiverDebounced) {
       return;
     }
-    setRewards([]);
     setRewardsLoading(true);
     try {
       const rewards = await getRewardList(systemContractAddress, receiverDebounced, isL2);
@@ -61,6 +61,10 @@ const Claim = () => {
     fetchRewards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [receiverDebounced]);
+
+  useEffect(() => {
+    setReceiver("");
+  }, [chain?.id]);
 
   // using to request a signature valid for 1 hour
   const nonce = Math.floor(new Date().getTime() / 1000 + 3600).toString(16);
