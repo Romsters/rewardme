@@ -8,6 +8,11 @@ This repository is a monorepo consisting of 3 packages:
 - [Auth](./packages/auth) - authentication service.
 - [App](./packages/app) - a front-end app.
 
+### Send reward flow:
+Call one of the `RewardMe` smart contract functions (`sendETHReward`, `sendTokenReward`, `sendNFTReward`) with receiver and reward details.
+### Claiming flow:
+`Get token from Google / GitHub` -> `Exchange it for a signed app token` -> `Smart contract verifies the app token` -> `The smart contract sends you your rewards to the address you choose`
+
 ## 📋 Prerequisites
 
 - Ensure you have `node >= 18.0.0` and `npm >= 9.0.0` installed.
