@@ -6,7 +6,7 @@ const GITHUB_GET_USER_URL: &'static str = "https://api.github.com/user";
 #[derive(Debug, Deserialize)]
 pub struct UserResponse {
   pub login: String,
-  pub email: String,
+  pub email: Option<String>,
 }
 
 pub async fn get_user(
