@@ -26,7 +26,6 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
       if (!isL2) {
         // Replace with proper explorer calls to get all tokens
         const ethBalance = await fetchBalance({ address: address! });
-        const usdcBalance = await fetchBalance({ address: "0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8" });
         tokens = [
           {
             address: L1_ETH_ADDRESS,
@@ -35,15 +34,6 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
             token: {
               decimals: ethBalance.decimals,
               symbol: ethBalance.symbol,
-            },
-          },
-          {
-            address: "0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8",
-            balance: usdcBalance.value.toString(),
-            isNFT: false,
-            token: {
-              decimals: 6,
-              symbol: "USDC",
             },
           },
         ];
