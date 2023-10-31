@@ -42,8 +42,8 @@ export default function TokenSelect({ value, setValue }: TokenSelectProps) {
             balance: usdcBalance.value.toString(),
             isNFT: false,
             token: {
-              decimals: usdcBalance.decimals,
-              symbol: usdcBalance.symbol,
+              decimals: 6,
+              symbol: "USDC",
             },
           },
         ];
