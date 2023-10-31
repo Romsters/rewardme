@@ -80,6 +80,14 @@ const zkSyncGoerliMainnet = defineChain({
 
 const sepoliaTestnet = {
   ...sepolia,
+  rpcUrls: {
+    default: {
+      http: ["https://sepolia.infura.io/v3/84842078b09946638c03157f83405213"],
+    },
+    public: {
+      http: ["https://sepolia.infura.io/v3/84842078b09946638c03157f83405213"],
+    },
+  },
   systemContractAddress: process.env.REACT_APP_L1_SEPOLIA_SYSTEM_CONTRACT_ADDRESS,
 };
 
