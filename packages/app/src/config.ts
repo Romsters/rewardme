@@ -54,7 +54,7 @@ const zkSyncGoerliTestnet = defineChain({
   systemContractAddress: process.env.REACT_APP_GOERLI_TESTNET_SYSTEM_CONTRACT_ADDRESS,
 });
 
-const zkSyncGoerliMainnet = defineChain({
+const zkSyncMainnet = defineChain({
   id: 324,
   network: "mainnet",
   name: "zkSync Era Mainnet",
@@ -92,7 +92,7 @@ const sepoliaTestnet = {
 };
 
 export const { chains, publicClient } = configureChains(
-  [zkSyncGoerliMainnet, zkSyncGoerliTestnet, zkSyncLocalNode, sepoliaTestnet],
+  [zkSyncMainnet, zkSyncGoerliTestnet, zkSyncLocalNode, sepoliaTestnet],
   [publicProvider()]
 );
 
